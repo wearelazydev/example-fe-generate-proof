@@ -15,7 +15,7 @@ function App() {
   const claimReward = async () => {
     const urlPullRequest = "https://github.com/wearelazydev/repo-tester/pull/1";
 
-    await fetch("https://backend-production-d476.up.railway.app/generate-proof?url=" + urlPullRequest, {
+    await fetch("backend-wearelazydev.up.railway.app/generate-proof?url=" + urlPullRequest, {
       method: "GET",
       headers: {
         Authorization: "Bearer " + localStorage.getItem("accessToken"),
@@ -38,7 +38,7 @@ function App() {
 
     if (codeParam && localStorage.getItem("accessToken") === null) {
       async function getAccessToken() {
-        await fetch("https://backend-production-d476.up.railway.app/getAccessToken?code=" + codeParam, {
+        await fetch("backend-wearelazydev.up.railway.app/getAccessToken?code=" + codeParam, {
           method: "GET",
         })
           .then((response) => {
