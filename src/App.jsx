@@ -5,6 +5,7 @@ const CLIENT_ID = "Iv23liCkGlCmiYmxhyZ6";
 
 function App() {
   const [proof, setProof] = useState({});
+  const [rerender, setRerender] = useState(false);
 
   const loginWIthGithub = () => {
     window.location.assign(
@@ -25,8 +26,8 @@ function App() {
         return response.json();
       })
       .then((data) => {
-        console.log(data);
         setProof(data);
+        setRerender(!rerender);
       });
   };
 
@@ -62,6 +63,15 @@ function App() {
       {localStorage.getItem("accessToken") ? (
         <>
           <button onClick={claimReward}>Generate Proof</button>
+          <button
+            style={{ marginLeft: "10px" }}
+            onClick={() => {
+              localStorage.removeItem("accessToken");
+              setRerender(!rerender);
+            }}
+          >
+            Logout
+          </button>
           {/* <pre>{proof && <h2>{proof}</h2>}</pre> */}
           <pre style={{ textAlign: "left", padding: "20px", backgroundColor: "#000000", color: "green", borderRadius: "10px", overflow: "auto" }}>
             {proof && JSON.stringify(proof, null, 2)}
